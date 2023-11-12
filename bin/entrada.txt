@@ -1,0 +1,71 @@
+// Ejemplo de archivo de entrada
+
+// Palabras reservadas
+inicio
+fin
+leer
+escribir
+entero
+real
+cadena
+logico
+si
+sino
+entonces
+mientras
+hacer
+repetir
+hasta
+variables
+
+// Identificadores
+variable1
+suma
+resultado
+numero
+contador
+
+// Números
+123
+456.789
+0.123
+987654321
+-12
+
+// Operadores
++
+-
+*
+/
+=
+==
+!=
+<
+<=
+>
+>=
+&&
+||
+!
+
+// Caracteres especiales
+(
+)
+;
+:
+,
+
+// Comentarios
+// Esto es un comentario
+
+// Constantes de cadena
+"Esto es una cadena"
+"Otra cadena"
+"Cadena con espacios"
+""
+
+// Valores lógicos
+verdadero
+falso
+truE
+FALSE
