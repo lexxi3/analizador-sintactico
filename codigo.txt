@@ -10,8 +10,25 @@ cuatro$ : cadena ;
 cinco@ : logico ;
 
 inicio
-    escribir (dos& ) ; 
-    leer (23);
+
+        inicio
+            escribir (dos&);
+        fin
+
+        inicio 
+            escribir ( dos&);
+        fin
+        mientras ( dos& >  5 ) hacer
+            inicio
+                escribir ( dos&) ; 
+            fin    
+        repetir
+            inicio
+                escribir (dos&);
+                leer ( tres% );
+            fin
+        hasta ( cinco == verdadero );
+
 fin
 
 

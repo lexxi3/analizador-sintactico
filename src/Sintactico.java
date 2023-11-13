@@ -83,39 +83,26 @@ public class Sintactico {
         match("FIN");
     }
 
-    private void proceso() throws Exception {
-        if (tokenList.get(currentIndex).token.equals("SI")) {
-            estructura_condicional();
-        }
-        if (tokenList.get(currentIndex).token.equals("REPETIR")) {
-            estructura_repetitiva();
-        }
-        if (tokenList.get(currentIndex).token.equals("MIENTRAS")) {
-            estructura_mientras();
-        }
-        if (tokenList.get(currentIndex).token.equals("ESCRIBIR") || tokenList.get(currentIndex).token.equals("LEER")) {
-            IO();
-        }
-    }
-
     private void estructura_condicional() throws Exception {
         match("SI");
         match("PARENTESISABIERTO");
         expresion();
         match("PARENTESISCERRADO");
         match("ENTONCES");
-        bloque_cuerpo();
+        proceso();
         match("SINO");
-        bloque_cuerpo();
+        proceso();
+        match("FIN");
     }
 
     private void estructura_repetitiva() throws Exception {
-        match("MIENTRAS");
+        match("REPETIR");
+        proceso();
+        match("HASTA");
         match("PARENTESISABIERTO");
         expresion();
         match("PARENTESISCERRADO");
-        bloque_cuerpo();
-        match("FINMIENTRAS");
+        match("PUNTOCOMA");
     }
 
     private void estructura_mientras() throws Exception {
@@ -124,15 +111,62 @@ public class Sintactico {
         expresion();
         match("PARENTESISCERRADO");
         match("HACER");
-        bloque_cuerpo();
+        proceso();
+
+    }
+
+    private void proceso() throws Exception {
+        if (tokenList.get(currentIndex).token.equals("SI")) {
+            estructura_condicional();
+            proceso();
+        }
+        if (tokenList.get(currentIndex).token.equals("REPETIR")) {
+            estructura_repetitiva();
+            proceso();
+        }
+        if (tokenList.get(currentIndex).token.equals("MIENTRAS")) {
+            estructura_mientras();
+            proceso();
+        }
+        if (tokenList.get(currentIndex).token.equals("ESCRIBIR")) {
+            IO();
+            proceso();
+        }
+        if (tokenList.get(currentIndex).token.equals("LEER")) {
+            IO();
+            proceso();
+        }
+        if (tokenList.get(currentIndex).token.equals("INICIO")) {
+            match("INICIO");
+            proceso();
+        }
     }
 
     private void expresion() throws Exception {
         valor();
+        operador_relacional();
+        valor();
     }
 
     private void operador_relacional() throws Exception {
-
+        if (tokenList.get(currentIndex).token.equals("MAYOR")) {
+            match("MAYOR");
+        }
+        if (tokenList.get(currentIndex).token.equals("MENOR")) {
+            match("MENOR");
+        }
+        if (tokenList.get(currentIndex).token.equals("MAYORIGUAL")) {
+            match("MAYORIGUAL");
+        }
+        if (tokenList.get(currentIndex).token.equals("MENORIGUAL")) {
+            match("MENORIGUAL");
+        }
+        if (tokenList.get(currentIndex).token.equals("IGUAL")) {
+            match("IGUAL");
+        }
+        if (tokenList.get(currentIndex).token.equals("DIFERENTE")) {
+            match("DIFERENTE");
+        }
     }
 
     private void IO() throws Exception {
