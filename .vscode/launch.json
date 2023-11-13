@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "analizador-sintactico_9ec46da1"
+        },
+        {
+            "type": "java",
+            "name": "Menu",
+            "request": "launch",
+            "mainClass": "Menu",
+            "projectName": "analizador-sintactico_9ec46da1"
+        },
+        {
+            "type": "java",
+            "name": "Regex",
+            "request": "launch",
+            "mainClass": "Regex",
+            "projectName": "analizador-sintactico_9ec46da1"
+        },
+        {
+            "type": "java",
+            "name": "analizador",
+            "request": "launch",
+            "mainClass": "analizador",
+            "projectName": "analizador-sintactico_9ec46da1"
+        },
+        {
+            "type": "java",
+            "name": "automata",
+            "request": "launch",
+            "mainClass": "automata",
+            "projectName": "analizador-sintactico_9ec46da1"
+        }
+    ]
+}

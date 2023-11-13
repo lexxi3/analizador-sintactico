@@ -1,18 +1,27 @@
-import java.io.*;
-import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import com.opencsv.CSVWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class analizador {
-    public static void main(String[] args) {
+import com.opencsv.CSVWriter;
+
+public class Lexico {
+    private String rutaArchivoEntrada;
+
+    public Lexico(String rutaArchivoEntrada) {
+        this.rutaArchivoEntrada = rutaArchivoEntrada;
+    }
+
+    public void analizar() {
         try {
             // Abrir el archivo de entrada para lectura
-            FileReader archivo = new FileReader(
-                    "C:\\Users\\diego\\Documents\\escuela\\alexia\\lenguajes\\analizador-sintactico\\entrada.txt");
+            FileReader archivo = new FileReader(rutaArchivoEntrada);
             BufferedReader lector = new BufferedReader(archivo);
-
             // Crear una lista para almacenar los tokens
             ArrayList<String[]> tokens = new ArrayList<String[]>();
 
@@ -50,7 +59,8 @@ public class analizador {
             String operadoresLogicosOr = "\\|\\|";
             String operadoresLogicosNot = "!";
 
-            String palabrasReservadas = "inicio|fin|leer|escribir|entero|real|cadena|logico|sino|si|entonces|mientras|hacer|repetir|hasta|variables";
+            String palabrasReservadas = "programa|inicio|fin|leer|escribir|entero|real|cadena|logico|sino|si|entonces|mientras|hacer|repetir|hasta|variables";
+            String programa = "programa";
             String inicio = "inicio";
             String fin = "fin";
             String leer = "leer";
@@ -120,6 +130,7 @@ public class analizador {
             palabrasMap.put("REPETIR", -23);
             palabrasMap.put("HASTA", -24);
             palabrasMap.put("VARIABLES", -25);
+            palabrasMap.put("PROGRAMA", -10);
 
             Map<String, Integer> aritmeticosMap = new HashMap<String, Integer>();
             aritmeticosMap.put("SUMA", -30);
@@ -178,18 +189,9 @@ public class analizador {
                         if (Pattern.matches(identificadorInicio, lexema)) {
                             token = "IDENTIFICADOR_INICIO";
                             categoria = categorias.get(nombreCategoria).get(token);
-                        } else if (Pattern.matches(identificadorLogico, lexema)) {
-                            token = "IDENTIFICADOR_LOGICO";
-                            categoria = categorias.get(nombreCategoria).get(token);
-                        } else if (Pattern.matches(identificadorEntero, lexema)) {
-                            token = "IDENTIFICADOR_ENTERO";
-                            categoria = categorias.get(nombreCategoria).get(token);
-                        } else if (Pattern.matches(identificadorReal, lexema)) {
-                            token = "IDENTIFICADOR_REAL";
-                            categoria = categorias.get(nombreCategoria).get(token);
-                        } else if (Pattern.matches(identificadorCadena, lexema)) {
-                            token = "IDENTIFICADOR_STRING";
-                            categoria = categorias.get(nombreCategoria).get(token);
+                        } else {
+                            token = "IDENTIFICADOR";
+                            categoria = -1;
                         }
 
                     } else if (Pattern.matches(operadoresRelacionales, lexema)) {
@@ -296,6 +298,9 @@ public class analizador {
                         } else if (Pattern.matches(logico, lexema)) {
                             token = "LOGICO";
                             categoria = categorias.get(nombreCategoria).get(token);
+                        } else if (Pattern.matches(programa, lexema)) {
+                            token = "PROGRAMA";
+                            categoria = categorias.get(nombreCategoria).get(token);
                         }
                     } else if (Pattern.matches(caracteresEspeciales, lexema)) {
                         nombreCategoria = "CARACTER_ESPECIAL";
@@ -349,7 +354,7 @@ public class analizador {
                     if (token.equals("COMENTARIO")) {
                         System.out.println("Comentario: " + lexema);
                     } else if (!token.equals("ERROR_LEXICO")) {
-                        String[] fila = { lexema, token, Integer.toString(numeroLinea), Integer.toString(categoria),
+                        String[] fila = { token, Integer.toString(numeroLinea), Integer.toString(categoria),
                                 nombreCategoria };
                         tokens.add(fila);
                     }
@@ -368,7 +373,7 @@ public class analizador {
             CSVWriter csvWriter = new CSVWriter(archivoSalida);
 
             // Escribir los encabezados en el archivo CSV
-            String[] encabezados = { "Lexema", "Token", "Número de línea", "Categoría", "Nombre Categoria" };
+            String[] encabezados = { "Token", "Número de línea", "Categoría", "Nombre Categoria" };
             csvWriter.writeNext(encabezados);
 
             // Escribir los datos de tokens en el archivo CSV

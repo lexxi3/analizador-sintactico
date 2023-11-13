@@ -1,0 +1,52 @@
+Variables 
+// Sección de  declaración de variables 
+// Puede contener cualquier cantidad  o ninguna de variables 	// de cualquier tipo definido
+
+uno&, dos& : entero ;
+tres% : real ;
+        cuatro$ : cadena ;
+        cinco@ : logico ;
+      
+Inicio
+
+// cuerpo del programa, puede contener cualquier cantidad 
+// de expresiones o estructuras  de control en cualquier 
+// orden al menos una  asignacion, puede contener cualquier 
+// cantidad de expresiones de asignación utilizando cualquier 
+// combinación de operadores aritméticos, lógicos o 		 
+// relacionales 
+
+    uno& =  10 + ( 39 * dos& ) ;
+
+// estructuras de control  pueden ser simples o anidadas 
+// en la condición para cualquier estructura puede ser 
+// cualquier  expresión valida 
+// en el condicional puede ser estructura simple o compuesta
+
+    si ( uno& > 10 ) entonces
+        inicio
+            escribir (dos&);
+        fin
+    sino
+        inicio 
+            escribir ( dos&);
+            cinco@ = ( 10  * (89 - 100) ) >= ( dos& ) ;
+        fin
+        dos& = 1;
+        mientras ( dos& >  5 ) hacer
+            inicio
+                dos& = dos& + 1; 
+                escribir ( dos&) ; 
+            fin    
+
+        cinco@ = falso;
+
+        repetir
+            inicio
+                dos& = dos& + 2; 
+                escribir (dos&);
+                leer ( tres% );
+            fin
+        hasta ( cinco == verdadero );
+    fin 
+fin 

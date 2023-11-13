@@ -1,0 +1,17 @@
+programa nombre?;
+
+variables 
+// Sección de  declaración de variables 
+// Puede contener cualquier cantidad  o ninguna de variables 	// de cualquier tipo definido
+
+uno&, dos&  : entero ;
+tres% : real ;
+cuatro$ : cadena ;
+cinco@ : logico ;
+
+inicio
+    escribir (dos& ) ; 
+    leer (23);
+fin
+
+
